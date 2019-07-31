@@ -24,6 +24,11 @@ public class MyLinkedList<T> {
         this.size = size;
     }
 
+    /**
+     * 添加元素到链表尾部
+     *
+     * @param t 元素值
+     */
     public void push(T t) {
         Node node = new Node(t);
         if (head == null) {
@@ -37,6 +42,109 @@ public class MyLinkedList<T> {
         }
         size++;
     }
+
+    /**
+     * 插入元素到指定索引处
+     *
+     * @param t     元素值
+     * @param index 索引
+     */
+    public void insert(T t, int index) {
+        if (index < 0 || index > size) {
+            throw new RuntimeException("索引有误！");
+        }
+        Node node = new Node(t);
+        if (index == 0) {
+            node.next = head;
+            head = node;
+            return;
+        }
+
+        int i = 0;
+        Node temp = head;
+        while (i < index - 1) {
+            temp = temp.next;
+            i++;
+        }
+        Node next = temp.next;
+        temp.next = node;
+        node.next = next;
+        size++;
+    }
+
+    /**
+     * 从链表头部取出节点
+     *
+     * @return T
+     */
+    public T get() {
+        if (head == null) {
+            return null;
+        }
+        return head.value;
+    }
+
+    /**
+     * 从指定索引取出元素
+     *
+     * @param index 索引
+     * @return T
+     */
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new RuntimeException("索引有误！");
+        }
+
+        int i = 0;
+        Node temp = head;
+        while (i < index) {
+            temp = temp.next;
+            i++;
+        }
+        return temp.value;
+    }
+
+    /**
+     * 从链表头部取出节点，并且删除头部元素
+     *
+     * @return T
+     */
+    public T pop() {
+        if (head == null) {
+            return null;
+        }
+        Node node = head;
+        head = head.next;
+        size--;
+        return node.value;
+    }
+
+    /**
+     * 从链表指定索引处删除元素，并且返回该节点的值
+     *
+     * @return T
+     */
+    public T delete(int index) {
+        if (index < 0 || index >= size) {
+            throw new RuntimeException("索引有误！");
+        }
+
+        int i = 0;
+        Node temp = head;
+        if (index == 0) {
+            head = head.next;
+            return temp.value;
+        }
+        while (i < index - 1) {
+            temp = temp.next;
+            i++;
+        }
+        Node next = temp.next;
+        temp.next = next.next;
+        size--;
+        return next.value;
+    }
+
 
     @Override
     public String toString() {
