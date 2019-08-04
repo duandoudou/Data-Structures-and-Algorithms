@@ -27,19 +27,24 @@ public class CountdownKNode {
         if (head == null) {
             throw new RuntimeException("链表为空");
         }
-        if(k < 1){
+        if (k < 1) {
             throw new RuntimeException("索引有误");
         }
-        Node first = head;
+        Node first = null;
         Node last = head;
 
         while (last != null) {
             last = last.next;
             if (k > 0) {
                 k--;
+            } else if (k == 0) {
+                first = head;
             } else {
                 first = first.next;
             }
+        }
+        if(first == null){
+            throw new RuntimeException("索引超出链表长度");
         }
         return (Integer) first.value;
     }
