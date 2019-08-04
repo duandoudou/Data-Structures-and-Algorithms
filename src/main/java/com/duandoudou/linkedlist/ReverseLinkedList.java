@@ -1,5 +1,8 @@
 package com.duandoudou.linkedlist;
 
+import com.duandoudou.linkedlist.entity.MyLinkedList;
+import com.duandoudou.linkedlist.entity.Node;
+
 /**
  * DataStructuresAndAlgorithms
  * Date: 2019/7/30
@@ -9,57 +12,40 @@ package com.duandoudou.linkedlist;
  */
 public class ReverseLinkedList {
 
-
     public static void main(String[] args) {
-        Node node1 = new Node(1);
-        Node node2 = new Node(2);
-        Node node3 = new Node(3);
-        Node node4 = new Node(4);
-        Node node5 = new Node(5);
-        Node node6 = new Node(6);
-        Node node7 = new Node(7);
-        Node node8 = new Node(8);
-        Node node9 = new Node(9);
-        Node node10 = new Node(10);
+        MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 
-        node1.next=node2;
-        node2.next=node3;
-        node3.next=node4;
-        node4.next=node5;
-        node5.next=node6;
-        node6.next=node7;
-        node7.next=node8;
-        node8.next=node9;
-        node9.next=node10;
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        list.push(4);
+        list.push(5);
+        list.push(6);
+        list.push(7);
+        list.push(8);
+        list.push(9);
+        list.push(10);
+        Node head = list.getHead();
 
-        print(node1);
-        print(reverse(node1));
+        print(head);
+        print(reverse(head));
     }
 
 
     public static Node reverse(Node head) {
-        if(head == null || head.next == null){
+        if (head == null || head.next == null) {
             return head;
         }
 
         Node prefix = null;
         Node temp = head;
-        while(temp != null){
+        while (temp != null) {
             Node next = temp.next;
             temp.next = prefix;
             prefix = temp;
             temp = next;
         }
         return prefix;
-    }
-
-    private static class Node<T> {
-        T value;
-        Node next;
-
-        Node(T value) {
-            this.value = value;
-        }
     }
 
     private static void print(Node head) {

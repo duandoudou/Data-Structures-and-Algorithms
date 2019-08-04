@@ -9,7 +9,7 @@ package com.duandoudou.linkedlist.entity;
  * @author duandoudou
  */
 public class MyLinkedList<T> {
-    public Node head;
+    private Node head;
 
     /**
      * 数组长度
@@ -20,17 +20,13 @@ public class MyLinkedList<T> {
         return size;
     }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
-
     /**
      * 添加元素到链表尾部
      *
      * @param t 元素值
      */
     public void push(T t) {
-        Node node = new Node(t);
+        Node node = new Node<T>(t);
         if (head == null) {
             head = node;
         } else {
@@ -53,7 +49,7 @@ public class MyLinkedList<T> {
         if (index < 0 || index > size) {
             throw new RuntimeException("索引有误！");
         }
-        Node node = new Node(t);
+        Node node = new Node<T>(t);
         if (index == 0) {
             node.next = head;
             head = node;
@@ -81,7 +77,7 @@ public class MyLinkedList<T> {
         if (head == null) {
             return null;
         }
-        return head.value;
+        return (T) head.value;
     }
 
     /**
@@ -101,7 +97,7 @@ public class MyLinkedList<T> {
             temp = temp.next;
             i++;
         }
-        return temp.value;
+        return (T) temp.value;
     }
 
     /**
@@ -116,7 +112,7 @@ public class MyLinkedList<T> {
         Node node = head;
         head = head.next;
         size--;
-        return node.value;
+        return (T) node.value;
     }
 
     /**
@@ -133,7 +129,7 @@ public class MyLinkedList<T> {
         Node temp = head;
         if (index == 0) {
             head = head.next;
-            return temp.value;
+            return (T) temp.value;
         }
         while (i < index - 1) {
             temp = temp.next;
@@ -142,7 +138,7 @@ public class MyLinkedList<T> {
         Node next = temp.next;
         temp.next = next.next;
         size--;
-        return next.value;
+        return (T) next.value;
     }
 
 
@@ -162,12 +158,7 @@ public class MyLinkedList<T> {
         return builder.toString();
     }
 
-    private class Node {
-        T value;
-        Node next;
-
-        public Node(T value) {
-            this.value = value;
-        }
+    public Node getHead() {
+        return head;
     }
 }
